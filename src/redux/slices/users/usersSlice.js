@@ -21,10 +21,13 @@ export const loginUserAction = createAsyncThunk(
   async ({ email, password }, { rejectWithValue, getState, dispatch }) => {
     try {
       // make the http reques
-      const { data } = await axios.post(`${process.env.BASE_URL}/users/login`,{
+      
+      const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/login`,{
         email,
         password,
       });
+      // save the user into localstorage
+      localStorage.setItem("userInfo",JSON.stringify(data));
       return data;
     } catch (error) {
       return rejectWithValue(error.response?.data);

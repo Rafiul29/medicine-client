@@ -35,7 +35,7 @@ const Register = () => {
                   name="fullname"
                   value={fullname}
                   onChange={onChangeHandler}
-                  className="w-full mb-4 px-12 py-6 border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md"
+                  className="w-full mb-4 px-12 py-6 border border-gray-200 focus:ring-cyan-300 focus:border-cyan-300 rounded-md"
                   type="text"
                   placeholder="Full Name"
                 />
@@ -43,7 +43,7 @@ const Register = () => {
                   name="email"
                   value={email}
                   onChange={onChangeHandler}
-                  className="w-full mb-4 px-12 py-6 border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md"
+                  className="w-full mb-4 px-12 py-6 border border-gray-200 focus:ring-cyan-300 focus:border-cyan-300 rounded-md"
                   type="email"
                   placeholder="Enter your email"
                 />
@@ -51,12 +51,12 @@ const Register = () => {
                   name="password"
                   value={password}
                   onChange={onChangeHandler}
-                  className="w-full mb-4 px-12 py-6 border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md"
+                  className="w-full mb-4 px-12 py-6 border border-gray-200 focus:ring-cyan-300 focus:border-cyan-300 rounded-md"
                   type="password"
                   placeholder="Enter your password"
                 />
               
-                  <button className="mt-12 md:mt-16 bg-blue-800 hover:bg-blue-900 text-white font-bold font-heading py-5 px-8 rounded-md uppercase">
+                  <button className="mt-12 md:mt-16 bg-cyan-800 hover:bg-cyan-900 text-white font-bold font-heading py-5 px-8 rounded-md uppercase">
                     Register
                   </button>
              
