@@ -17,7 +17,7 @@ const Navbar = () => {
   const isLoggedIn=user?.token ? true:false;
 
   return (
-    <header className="w-full h-20 border-b border-cyan flex items-center bg-white/90 backdrop-blur-lg fixed z-50 top-0 right-0 left-0 ">
+    <header className="w-full h-20 border-b border-cyan flex items-center bg-white/90 backdrop-blur-2xl fixed z-50 top-0 right-0 left-0 ">
       <nav className="wrapper flex justify-between items-center">
         {/* nav logo */}
         <h2 className="logo">

@@ -1,23 +1,31 @@
 import React, { useState } from 'react'
-
+import { useDispatch,useSelector } from 'react-redux';
+import ErrorMsg from '../../ErrorMsg/ErrorMsg'
+import { registerUserAction } from '../../../redux/slices/users/usersSlice';
 const Register = () => {
+
+  const dispatch=useDispatch();
 
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
     password: "",
   });
-  //---Destructuring---
+  
   const { fullname, email, password } = formData;
-  //---onchange handler----
+
   const onChangeHandler = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  //---onsubmit handler----
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    dispatch(registerUserAction({fullname,email,password}))
   };
+
+  const { user, error, loading } = useSelector((state) => state?.users);
+
+
   return (
     <>
     <section className="relative overflow-x-hidden">
@@ -28,7 +36,8 @@ const Register = () => {
               <h3 className="mb-8 text-4xl md:text-5xl font-bold font-heading">
                 Signing up with social is super quick
               </h3>
-             
+              {/* errr */}
+              {error && <ErrorMsg message={error?.message} />}
               <p className="mb-10">Please, do not hesitate</p>
               <form onSubmit={onSubmitHandler}>
                 <input
@@ -56,9 +65,18 @@ const Register = () => {
                   placeholder="Enter your password"
                 />
               
-                  <button className="mt-12 md:mt-16 bg-cyan-800 hover:bg-cyan-900 text-white font-bold font-heading py-5 px-8 rounded-md uppercase">
-                    Register
-                  </button>
+              {loading ? (
+                      <button
+                        disabled
+                        className="bg-gray-800  text-white font-bold font-heading py-5 px-8 rounded-md uppercase"
+                      >
+                        Loading...
+                      </button>
+                    ) : (
+                      <button className="bg-cyan-800 hover:bg-cyan-900 text-white font-bold font-heading py-5 px-8 rounded-md uppercase">
+                        Register
+                      </button>
+                    )}
              
               </form>
             </div>
