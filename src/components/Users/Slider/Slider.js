@@ -40,18 +40,18 @@ const Slider = () => {
                 alt={item.alt}
                 height={1920}
                 width={1080}
-                priority
+               
                 className="w-full h-full object-cover"
               />
             <Overlay/>
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[2] text-white space-y-5">
                 <h1
                   data-swiper-parallax="-300%"
-                  className="text-8xl font-semibold "
+                  className="md:text-8xl text-4xl font-semibold "
                 >
                   {item.headline}
                 </h1>
-                <p data-swiper-parallax="-500%" className="text-2xl">
+                <p data-swiper-parallax="-500%" className="md:text-2xl text-xl">
                   {item.paragraph}
                 </p>
                 <div data-swiper-parallax="-600%">

@@ -7,11 +7,12 @@ import {
 import {BsCart3,} from "react-icons/bs"
 import {BiUser} from "react-icons/bi"
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-
+  const { cartItems } = useSelector((state) => state.cart);
   // get login user from localStorage
   const user=JSON.parse(localStorage.getItem("userInfo"));
   const isLoggedIn=user?.token ? true:false;
@@ -33,7 +34,7 @@ const Navbar = () => {
             <Link to="/" className="link-item ">
               Home
             </Link>
-            <Link to="/medicine" className="link-item ">
+            <Link to="/medicines" className="link-item ">
               Medicine
             </Link>
             <Link to="/about" className="link-item ">
@@ -44,6 +45,7 @@ const Navbar = () => {
             </Link>
           </div>
         </div>
+
         {/* nav right */}
         <div className="hidden sm:block">
           <div className="flex gap-5 justify-center items-center">
@@ -51,8 +53,7 @@ const Navbar = () => {
             <span className="cart-icons relative">
               <BsCart3 className="text-xl" />
               <span className="cart-counter absolute -top-3 -right-3 text-x5 bg-orange-600 h-5 w-5 rounded-full flex items-center justify-center font-medium">
-               
-             5
+              {cartItems.length}
               </span>
             </span>
           </Link>

@@ -110,11 +110,12 @@ export const fetchMedicinesAction = createAsyncThunk(
 //fetch SingleMedicine action
 export const fetchSingleMedicineAction = createAsyncThunk(
   "medicine/details",
-  async ({ url }, { rejectWithValue, getState, dispatch }) => {
+  async ({ id }, { rejectWithValue, getState, dispatch }) => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API_BASE_URL}/medicines/${url}`
+        `${process.env.REACT_APP_API_BASE_URL}/medicines/${id}`
       );
+      console.log(id)
       return data;
     } catch (error) {
       return rejectWithValue(error?.response?.data);

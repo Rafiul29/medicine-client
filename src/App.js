@@ -9,17 +9,17 @@ import AdminDashboard from "./components/Admin/AdminDashboard";
 import AddMedicine from "./components/Admin/Medicines/AddMedicine";
 import MedicineFilters from "./components/Users/Medicines/MedicineFilters";
 import UpdateMedicine from "./components/Admin/Medicines/UpdateMedicine";
-import  Home  from "./pages/Home";
+import Home from "./pages/HomePage";
+import MedicinePage from "./pages/MedicinePage";
+import MedicineItem from "./components/Users/Medicines/MedicineItem";
+import CartPages from "./pages/CartPages";
 
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
-      <Route
-          path="/"
-          element={<Home/>}
-        />
+      
         {/* admin route */}
         <Route
           path="/admin"
@@ -42,10 +42,19 @@ function App() {
           path="medicine/edit/:id"
           element={
             <AdminRoutes>
-             <UpdateMedicine/>
+              <UpdateMedicine />
             </AdminRoutes>
           }
         />
+
+        
+        {/* public routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/medicines" element={<MedicinePage />} />
+        <Route path="/medicines/:id" element={<MedicineItem/>} />
+        {/* <Route path="/medicines-filters" element={<MedicineFilters />} /> */}
+        <Route path="/cart" element={<CartPages/>} />
+
         <Route />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

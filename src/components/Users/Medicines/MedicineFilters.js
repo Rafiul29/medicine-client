@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMedicinesAction } from '../../../redux/slices/medicines/medicineSlices';
+import SectionTitle from '../../SectionTitle/SectionTitle';
+import MedicineCard from './MedicineCard';
 
 
 const MedicineFilters = () => {
@@ -18,7 +20,7 @@ const MedicineFilters = () => {
   if(price){
     medicineUrl=`medicines?price=${price}`
   }
-  
+
   useEffect(()=>{
     dispatch(fetchMedicinesAction({
       url:medicineUrl
@@ -31,10 +33,21 @@ const MedicineFilters = () => {
     loading,
     error,
   } = useSelector((state) => state?.medicines);
+console.log(medicines?.medicines)
 
-  console.log(medicines)
   return (
-    <div>MedicineFilters</div>
+    <section className='section-padding'>
+      <div className="wrapper space-y-10">
+          <SectionTitle title="Medicine" subtitle="Browse all Medicine"/>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+      {
+        medicines?.medicines.map((medicine)=>(
+          <MedicineCard key={medicine._id} medicine={medicine}/>
+        ))
+      }
+     </div>
+      </div>
+    </section>
   )
 }
 
