@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import ErrorMsg from "../../ErrorMsg/ErrorMsg";
@@ -16,7 +16,7 @@ export default function AddMedicine() {
   const [countInStock, setCountInStock] = useState(0);
 
   //get product from store
-  const { medicines, isAdded, loading, error } = useSelector(
+  const { medicines, isAdded, error } = useSelector(
     (state) => state?.medicines
   
   );

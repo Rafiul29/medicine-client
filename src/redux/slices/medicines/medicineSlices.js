@@ -189,7 +189,7 @@ const medicineSlice = createSlice({
       state.error = action.payload;
     });
 
-    //reset error
+    // // reset error
     // builder.addCase(resetErrAction.pending, (state, action) => {
     //   state.error = null;
     // });
