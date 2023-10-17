@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserProfileAction } from "../../../redux/slices/users/usersSlice";
 import {AiFillCalendar} from "react-icons/ai"
+import ErrorMsg from "../../ErrorMsg/ErrorMsg";
 
 export default function CustomerProfile() {
   //dispatch
@@ -17,6 +18,9 @@ export default function CustomerProfile() {
 
 
   return (
+   <>
+      {error && (<ErrorMsg message={error} />)}
+      {loading && (<h2>loading .....</h2>)}
     <section className="section-padding mt-20 ">
     <div className="wrapper flex justify-center items-center ">
     <div className="space-y-10">
@@ -51,8 +55,8 @@ export default function CustomerProfile() {
         </div>
       </div>
     </div>
-    </div>
-        
+    </div> 
     </section>
+   </>
   );
 }

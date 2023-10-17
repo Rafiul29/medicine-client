@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 import {
   AiOutlineShoppingCart,
   AiOutlineClose,
@@ -12,7 +13,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../../redux/slices/users/usersSlice";
 
 const Navbar = () => {
-  
   // dispatch
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -25,7 +25,7 @@ const Navbar = () => {
   const logoutHandler = () => {
     dispatch(logoutAction());
     //reload
-   window.location.reload();
+    window.location.reload();
   };
 
   return (
@@ -59,22 +59,15 @@ const Navbar = () => {
 
         {/* nav right */}
         <div className="hidden sm:block">
-          <div className="flex gap-5 justify-center items-center">
-            <Link to="/cart">
-              <span className="cart-icons relative">
-                <BsCart3 className="text-xl" />
-                <span className="cart-counter absolute -top-3 -right-3 text-x5 bg-orange-600 h-5 w-5 rounded-full flex items-center justify-center font-medium">
-                  {cartItems.length}
+          <div className="flex gap-5 justify-center items-center space-x-3">
+            {user && (
+              <Link to="/cart">
+                <span className="cart-icons relative">
+                  <BsCart3 className="text-xl" />
+                  <span className="cart-counter absolute -top-3 -right-3 text-x5 bg-orange-600 h-5 w-5 rounded-full flex items-center justify-center font-medium">
+                    {cartItems.length}
+                  </span>
                 </span>
-              </span>
-            </Link>
-
-            {user?.userFound?.isAdmin && (
-              <Link
-                to="/admin"
-                className="inline-flex items-center rounded-md border border-transparent bg-red-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                Admin Dashboard
               </Link>
             )}
 
@@ -96,22 +89,31 @@ const Navbar = () => {
             )}
 
             {isLoggedIn && (
-              <div className="flex">
+              <div className="flex items-center space-x-3">
+                {user?.userFound?.isAdmin && (
+                  <Link
+                    to="/admin"
+                    className="inline-block rounded-md border border-transparent bg-red-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  >
+                    Admin Dashboard
+                  </Link>
+                )}
+
                 <Link
                   to="/customer-profile"
-                  className="-m-2 p-2 mr-2 text-gray-400 hover:text-gray-500"
+                  className="inline-block -m-2 p-2 mr-2 text-cyan-400 hover:text-cyan-600 font-semibold text-2xl"
                 >
                   <BiUser />
                 </Link>
                 {/* logout */}
-                <button onClick={logoutHandler}>
+                <button onClick={logoutHandler} className="text-red-700">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 h-6 text-gray-500"
+                    className="w-6 h-6 text-2xl"
                   >
                     <path
                       strokeLinecap="round"
