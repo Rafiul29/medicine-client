@@ -12,7 +12,7 @@ const MedicineCard = ({medicine}) => {
   _id,
   }=medicine
   return (
-    <div className="product flex flex-col gap-2 rounded-md overflow-hidden  shadow-md hover:shadow-xl duration-300 ">
+    <div className=" product flex flex-col gap-2 rounded-md overflow-hidden border shadow-md hover:shadow-xl duration-300 ">
     <div className="img w-full h-64 overflow-hidden">
       <img
         src={images}
@@ -21,7 +21,7 @@ const MedicineCard = ({medicine}) => {
       />
     </div>
 
-    <div className="product_detail p-3 flex flex-col gap-2  bg-gray-100">
+    <div className="product_detail p-3 flex flex-col gap-2  bg-gray-50">
       <h3 className="text-xl font-semibold truncate">{name}</h3>
 
      <p className='text-justify  truncate'>{description}</p>

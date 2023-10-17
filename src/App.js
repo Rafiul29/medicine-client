@@ -7,12 +7,13 @@ import AuthRoute from "./components/AuthRoute/AuthRoute";
 import AdminRoutes from "./components/AuthRoute/AdminRoutes";
 import AdminDashboard from "./components/Admin/AdminDashboard";
 import AddMedicine from "./components/Admin/Medicines/AddMedicine";
-import MedicineFilters from "./components/Users/Medicines/MedicineFilters";
+// import MedicineFilters from "./components/Users/Medicines/MedicineFilters";
 import UpdateMedicine from "./components/Admin/Medicines/UpdateMedicine";
 import Home from "./pages/HomePage";
 import MedicinePage from "./pages/MedicinePage";
 import MedicineItem from "./components/Users/Medicines/MedicineItem";
 import CartPages from "./pages/CartPages";
+import CustomerProfile from "./components/Users/Profile/CustomerProfile";
 
 function App() {
   return (
@@ -54,8 +55,15 @@ function App() {
         <Route path="/medicines/:id" element={<MedicineItem/>} />
         {/* <Route path="/medicines-filters" element={<MedicineFilters />} /> */}
         <Route path="/cart" element={<CartPages/>} />
-
-        <Route />
+       <Route
+          path="/customer-profile"
+          element={
+            <AuthRoute>
+              <CustomerProfile />
+            </AuthRoute>
+          }
+        
+         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

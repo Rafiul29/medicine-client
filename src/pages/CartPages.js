@@ -49,7 +49,7 @@ const CartPages = () => {
       </div>
       {data.length>0 && (
       <>
-      <div className="cart-container">
+      <div className="cart-container wrapper">
         <div className="medicine-headlines grid grid-cols-5 gap-10 border-b pb-3 uppercase font-medium">
           <div className="col-medicine col-span-2">medicine</div>
           <div className="col-unit-price">Unit Price</div>
@@ -117,7 +117,7 @@ const CartPages = () => {
             Checkout
           </button>{" "}
           <button
-            className="continune uppercase text-cyan-500 font-medium flex gap-1 mt-2"
+            className="continune uppercase text-cyan-500 md:font-medium flex flex-row gap-1 mt-2 text-sm "
             onClick={medicineCard}
           >
             <BsArrowLeft className="mt-1" />

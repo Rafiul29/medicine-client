@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { useDispatch,useSelector } from 'react-redux';
 import ErrorMsg from '../../ErrorMsg/ErrorMsg'
 import { registerUserAction } from '../../../redux/slices/users/usersSlice';
+
+
 const Register = () => {
 
   const dispatch=useDispatch();
-
+  
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
@@ -26,9 +28,15 @@ const Register = () => {
   const { user, error, loading } = useSelector((state) => state?.users);
 
 
+//redirect
+  if (user?.email) {
+    window.location.href = "/login";
+  }
+
+
   return (
     <>
-    <section className="relative overflow-x-hidden">
+    <section className="relative overflow-x-hidden section-padding">
       <div className="container px-4 mx-auto">
         <div className="flex flex-wrap items-center">
           <div className="w-full lg:w-2/6 px-4 mb-12 lg:mb-0">
@@ -87,7 +95,7 @@ const Register = () => {
         className="hidden lg:block lg:absolute top-0 bottom-0 right-0 lg:w-3/6 bg-center bg-cover bg-no-repeat"
         style={{
           backgroundImage:
-            'url("https://cdn.pixabay.com/photo/2017/03/29/04/47/high-heels-2184095_1280.jpg")',
+            'url("https://t4.ftcdn.net/jpg/02/81/42/77/360_F_281427785_gfahY8bX4VYCGo6jlfO8St38wS9cJQop.jpg")',
         }}
       />
     </section>

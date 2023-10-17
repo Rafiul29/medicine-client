@@ -13,27 +13,32 @@ const initialState = {
     loading: false,
     error: null,
     userInfo: localStorage.getItem("userInfo")
-    ? JSON.parse(localStorage.getItem("userInfo"))
-    : null,
+      ? JSON.parse(localStorage.getItem("userInfo"))
+      : null,
   },
 };
 
 // register action
 
-// login action
 export const registerUserAction = createAsyncThunk(
   "users/register",
-  async ({fullname, email, password }, { rejectWithValue, getState, dispatch }) => {
+  async (
+    { fullname, email, password },
+    { rejectWithValue, getState, dispatch }
+  ) => {
     try {
       // make the http request
-      
-      const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/register`,{
-        fullname,
-        email,
-        password,
-      });
+
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/users/register`,
+        {
+          fullname,
+          email,
+          password,
+        }
+      );
       // save the user into localstorage
-      localStorage.setItem("userInfo",JSON.stringify(data));
+      localStorage.setItem("userInfo", JSON.stringify(data));
       return data;
     } catch (error) {
       return rejectWithValue(error.response?.data);
@@ -47,17 +52,54 @@ export const loginUserAction = createAsyncThunk(
   async ({ email, password }, { rejectWithValue, getState, dispatch }) => {
     try {
       // make the http reques
-      
-      const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/login`,{
-        email,
-        password,
-      });
+
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/users/login`,
+        {
+          email,
+          password,
+        }
+      );
       // save the user into localstorage
-      localStorage.setItem("userInfo",JSON.stringify(data));
+      localStorage.setItem("userInfo", JSON.stringify(data));
       return data;
     } catch (error) {
       return rejectWithValue(error.response?.data);
     }
+  }
+);
+
+//user profile action
+export const getUserProfileAction = createAsyncThunk(
+  "users/profile-fetched",
+  async (payload, { rejectWithValue, getState, dispatch }) => {
+    try {
+      //get token
+      const token = getState()?.users?.userAuth?.userInfo?.token;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_BASE_URL}/users/profile`,
+        config
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+//logout action
+export const logoutAction = createAsyncThunk(
+  "users/logout",
+  async (payload, { rejectWithValue, getState, dispatch }) => {
+    //get token
+    localStorage.removeItem("userInfo");
+    return true;
   }
 );
 
@@ -92,11 +134,24 @@ const userSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     });
-    // reset error action
-    builder.addCase(resetErrAction.pending,(state)=>{
-      state.error=null;
-    })
 
+    //profile
+    builder.addCase(getUserProfileAction.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(getUserProfileAction.fulfilled, (state, action) => {
+      state.profile = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getUserProfileAction.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+    
+    // reset error action
+    builder.addCase(resetErrAction.pending, (state) => {
+      state.error = null;
+    });
   },
 });
 

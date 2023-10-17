@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUserAction } from "../../../redux/slices/users/usersSlice";
 import ErrorMsg from "../../ErrorMsg/ErrorMsg";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate=useNavigate();
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
@@ -31,16 +33,17 @@ const Login = () => {
     (state) => state?.users?.userAuth
   );
 
-  //redirect
-  // if (userInfo?.userFound?.isAdmin) {
-  //   window.location.href = "/admin";
-  // } else {
-  //   window.location.href = "/customer-profile";
-  // }
+    useEffect(()=>{
+      if(userInfo?.userFound){
+        navigate("/")
+      }
+    })
+
+
 
   return (
     <>
-      <section className="py-20 bg-gray-600 overflow-x-hidden">
+      <section className="py-20 bg-gray-600 overflow-x-hidden section-padding mt-20">
         <div className="relative container px-4 mx-auto">
           <div className="absolute inset-0 bg-cyan-200 my-24 -ml-4" />
           <div className="relative flex flex-wrap bg-white">
@@ -108,7 +111,7 @@ const Login = () => {
               className="w-full md:w-2/6 h-128 md:h-auto flex items-center lg:items-end px-4 pb-20 bg-cover bg-no-repeat"
               style={{
                 backgroundImage:
-                  'url("https://cdn.pixabay.com/photo/2017/03/29/04/47/high-heels-2184095_1280.jpg")',
+                  'url("https://t4.ftcdn.net/jpg/02/81/42/77/360_F_281427785_gfahY8bX4VYCGo6jlfO8St38wS9cJQop.jpg")',
               }}
             ></div>
           </div>
