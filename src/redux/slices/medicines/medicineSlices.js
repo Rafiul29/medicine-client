@@ -85,9 +85,8 @@ export const updateMedicineAction = createAsyncThunk(
 
 //fetch all Medicines action
 export const fetchMedicinesAction = createAsyncThunk(
-  "product/list",
+  "medicine/list",
   async ({ url }, { rejectWithValue, getState, dispatch }) => {
-    console.log(url);
     try {
       const token = getState()?.users?.userAuth?.userInfo?.token;
       const config = {
@@ -167,7 +166,7 @@ const medicineSlice = createSlice({
       state.isAdded = true;
     });
     builder.addCase(fetchMedicinesAction.rejected, (state, action) => {
-      state.loading = false;
+      state.loading = true;
       state.medicines = null;
       state.isAdded = false;
       state.error = action.payload;

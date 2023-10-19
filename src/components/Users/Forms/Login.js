@@ -24,7 +24,6 @@ const Login = () => {
   //---onsubmit handler----
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(email, password);
     dispatch(loginUserAction({ email, password }));
   };
 

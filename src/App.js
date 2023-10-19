@@ -14,6 +14,7 @@ import MedicinePage from "./pages/MedicinePage";
 import MedicineItem from "./components/Users/Medicines/MedicineItem";
 import CartPages from "./pages/CartPages";
 import CustomerProfile from "./components/Users/Profile/CustomerProfile";
+import ManageStocks from "./components/Admin/Medicines/ManageStocks";
 
 function App() {
   return (
@@ -32,22 +33,29 @@ function App() {
         />
         {/* medicine */}
         <Route
-          path="add-medicine"
+          path="admin/add-medicine"
           element={
             <AdminRoutes>
-              <AddMedicine />
+              <AddMedicine/>
             </AdminRoutes>
           }
         />
         <Route
-          path="medicine/edit/:id"
+          path="admin/medicines/edit/:id"
           element={
             <AdminRoutes>
               <UpdateMedicine />
             </AdminRoutes>
           }
         />
-
+         <Route
+            path="admin/manage-medicines"
+            element={
+              <AdminRoutes>
+              <ManageStocks/>
+              </AdminRoutes>
+            }
+          />
         
         {/* public routes */}
         <Route path="/" element={<Home />} />
