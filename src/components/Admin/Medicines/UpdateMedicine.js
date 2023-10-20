@@ -1,42 +1,34 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import ErrorMsg from "../../ErrorMsg/ErrorMsg";
-import SuccessMsg from "../../SuccessMsg/SuccessMsg";
-import { createMedicineAction, fetchSingleMedicineAction, updateMedicineAction } from "../../../redux/slices/medicines/medicineSlices";
-import { useParams } from "react-router-dom";
+import {fetchSingleMedicineAction, updateMedicineAction } from "../../../redux/slices/medicines/medicineSlices";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function UpdateMedicine() {
   const dispatch = useDispatch();
 
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [images, setImages] = useState("");
-  const [price, setPrice] = useState(0);
-  const [countInStock, setCountInStock] = useState(0);
-
-  //get product from store
-  const { medicines, isAdded, loading, error } = useSelector(
+  const { medicine, isAdded, loading, error } = useSelector(
     (state) => state?.medicines);
 
+  const [name, setName] = useState(medicine?.medicine?.name);
+  const [description, setDescription] = useState(medicine?.medicine?.description);
+  const [category, setCategory] = useState(medicine?.medicine?.category);
+  const [images, setImages] = useState(medicine?.medicine?.images);
+  const [price, setPrice] = useState(medicine?.medicine?.price);
+  const [countInStock, setCountInStock] = useState(medicine?.medicine?.countInStock);
 
+// navigate
+const navigate=useNavigate();
 //get id from params
 const { id } = useParams();
-  //fetch single product
 
+  //fetch single product
   useEffect(() => {
-    dispatch(fetchSingleMedicineAction(id));
+    dispatch(fetchSingleMedicineAction({id}));
   }, [id, dispatch]);
 
-  function resetFrom(){
-    setName("");
-    setCategory("");
-    setImages("");
-    setPrice("");
-    setCountInStock("");
-    setDescription("")
-  };
+
+
   //onSubmit
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -50,17 +42,13 @@ const { id } = useParams();
       countInStock,
     };
 
-    dispatch(updateMedicineAction(obj));
-
-    // reset input form
-    resetFrom();
+    dispatch(updateMedicineAction({obj,id}));
+    navigate("/admin/manage-medicines")
   };
 
   return (
     <>
-      {error && <ErrorMsg message={error?.message} />}
-      {isAdded && <SuccessMsg message="Medicine Added Successfully" />}
-
+    
       <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8  section-padding mt-10">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
@@ -74,6 +62,9 @@ const { id } = useParams();
         </div>
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          {/* {error && <ErrorMsg message={error?.message} />}
+      {isAdded && <SuccessMsg message="Medicine Update Successfully" />} */}
+
             <form className="space-y-6" onSubmit={handleOnSubmit}>
               {/* name */}
               <div>

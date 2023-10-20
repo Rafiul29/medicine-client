@@ -41,7 +41,7 @@ function App() {
           }
         />
         <Route
-          path="admin/medicines/edit/:id"
+          path="admin/medicine/edit/:id"
           element={
             <AdminRoutes>
               <UpdateMedicine />

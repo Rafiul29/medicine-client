@@ -56,13 +56,8 @@ export const createMedicineAction = createAsyncThunk(
 
 export const updateMedicineAction = createAsyncThunk(
   "medicine/update",
-  async (payload, { rejectWithValue, getState, dispatch }) => {
-    console.log(payload);
+  async ({id,obj}, { rejectWithValue, getState, dispatch }) => {
     try {
-      const {
-        name, description, category, images, price, countInStock,
-        id,
-      } = payload;
       const token = getState()?.users?.userAuth?.userInfo?.token;
       const config = {
         headers: {
@@ -72,10 +67,11 @@ export const updateMedicineAction = createAsyncThunk(
       const { data } = await axios.put(
         `${process.env.REACT_APP_API_BASE_URL}/medicines/${id}`,
         {
-          name, description, category, images, price, countInStock
+          ...obj
         },
         config
       );
+
       return data;
     } catch (error) {
       return rejectWithValue(error?.response?.data);
@@ -114,7 +110,7 @@ export const fetchSingleMedicineAction = createAsyncThunk(
       const { data } = await axios.get(
         `${process.env.REACT_APP_API_BASE_URL}/medicines/${id}`
       );
-      console.log(id)
+      console.log(id);
       return data;
     } catch (error) {
       return rejectWithValue(error?.response?.data);

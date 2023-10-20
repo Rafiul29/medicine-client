@@ -133,7 +133,7 @@ export default function ManageStocks() {
                         )}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {medicine?.countMedicine}
+                        {medicine?.countInStock}
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -142,7 +142,7 @@ export default function ManageStocks() {
                       {/* edit */}
                       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                           <Link
-                            to={`/admin/medicines/edit/${medicine._id}`}
+                            to={`/admin/medicine/edit/${medicine._id}`}
                             className="text-indigo-600 hover:text-indigo-900">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
