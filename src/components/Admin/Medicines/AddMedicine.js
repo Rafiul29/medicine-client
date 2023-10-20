@@ -29,7 +29,7 @@ export default function AddMedicine() {
   const { categories } = useSelector((state) => state?.categories?.categories);
 
   //get product from store
-  const { medicines ,loading} = useSelector(
+  const {loading} = useSelector(
     (state) => state?.medicines);
 
   function resetFrom(){
@@ -120,20 +120,6 @@ export default function AddMedicine() {
               </div>
 
               {/* Select category */}
-              {/* <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Category
-                </label>
-                <div className="mt-1">
-                  <input
-                    name="category"
-                    type="text"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-cyan-500 focus:outline-none focus:ring-cyan-500 sm:text-sm"
-                  />
-                </div>
-              </div> */}
                  <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Select Category
