@@ -15,11 +15,16 @@ import MedicineItem from "./components/Users/Medicines/MedicineItem";
 import CartPages from "./pages/CartPages";
 import CustomerProfile from "./components/Users/Profile/CustomerProfile";
 import ManageStocks from "./components/Admin/Medicines/ManageStocks";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import CategoryToAdd from "./components/Admin/Categories/AddCategory";
+import ManageCategories from "./components/Admin/Categories/ManageCategories";
 
 function App() {
   return (
     <>
       <Navbar />
+      <ToastContainer/>
       <Routes>
       
         {/* admin route */}
@@ -53,6 +58,24 @@ function App() {
             element={
               <AdminRoutes>
               <ManageStocks/>
+              </AdminRoutes>
+            }
+          />
+
+            {/* Category */}
+            <Route
+            path="/admin/category-to-add"
+            element={
+              <AdminRoutes>
+                <CategoryToAdd />
+              </AdminRoutes>
+            }
+          />
+           <Route
+            path="/admin/manage-category"
+            element={
+              <AdminRoutes>
+                <ManageCategories />
               </AdminRoutes>
             }
           />

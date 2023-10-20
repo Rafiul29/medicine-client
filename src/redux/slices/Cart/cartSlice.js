@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const initialState = {
   cartItems: localStorage.getItem("cartItems")
@@ -23,31 +23,31 @@ const cartSlice = createSlice({
       if (existedItemIndex >= 0) {
         // increase quantity
         state.cartItems[existedItemIndex].cartQuantity += 1;
-        // toast.info('Quantity Increase', {
-        //   position: "bottom-left",
-        //   autoClose: 5000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        //   theme: "light",
-        //   });
+        toast.info('Quantity Increase', {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       } else {
         // add to cart
         const assembledItem = { ...action.payload, cartQuantity: 1 };
         state.cartItems.push(assembledItem);
 
-        // toast.success('Product added into cart', {
-        //   position: "bottom-left",
-        //   autoClose: 5000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        //   theme: "light",
-        //   });
+        toast.success('Medicine added into cart', {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       }
        // add to local storage
        localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
@@ -62,32 +62,32 @@ const cartSlice = createSlice({
       //update local storage
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
 
-      // toast.warn('Product remove from cart!', {
-      //   position: "bottom-left",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light",
-      //   });
+      toast.warn('Medicine remove from cart!', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     },
 
     clearCart(state, action) {
       state.cartItems = [];
       //update local storage
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-      // toast.error('cart clear', {
-      //   position: "bottom-left",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light",
-      //   });
+      toast.error('cart clear', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     },
 
     decreaseCart(state, action) {
@@ -98,31 +98,31 @@ const cartSlice = createSlice({
       //if exist
       if (state.cartItems[itemIndex].cartQuantity > 1) {
         state.cartItems[itemIndex].cartQuantity -= 1;
-        // toast.info('Quantity decrease', {
-        //   position: "bottom-left",
-        //   autoClose: 5000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        //   theme: "light",
-        //   });
+        toast.info('Quantity decrease', {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       } else if (state.cartItems[itemIndex].cartQuantity === 1) {
         const updatedCartItems = state.cartItems.filter(
           (item) => item._id !== action.payload._id
         );
         state.cartItems = updatedCartItems;
-        // toast.warn('Product remove from cart!', {
-        //   position: "bottom-left",
-        //   autoClose: 5000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        //   theme: "light",
-        //   });
+        toast.warn('Medicine remove from cart!', {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       }
 
       //update local storage
@@ -130,7 +130,6 @@ const cartSlice = createSlice({
     },
 
     //total amount
-
     getSubtotal(state,action){
       const subtotal=state.cartItems.reduce((acc,item)=>{
           const {price,cartQuantity}=item;
@@ -140,9 +139,6 @@ const cartSlice = createSlice({
       },0)
       state.cartTotalAmount=subtotal;
     }
- 
-
-
   },
 });
 

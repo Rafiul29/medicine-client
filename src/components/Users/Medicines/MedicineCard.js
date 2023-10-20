@@ -5,10 +5,8 @@ import { currencyFormatter } from '../../../utils/currencyFormatter'
 const MedicineCard = ({medicine}) => {
   const {  name,
     description,
-    category,
     images,
     price,
-    countInStock,
   _id,
   }=medicine
   return (

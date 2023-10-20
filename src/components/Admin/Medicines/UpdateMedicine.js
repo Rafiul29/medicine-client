@@ -1,33 +1,39 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import {fetchSingleMedicineAction, updateMedicineAction } from "../../../redux/slices/medicines/medicineSlices";
+import {
+  fetchSingleMedicineAction,
+  updateMedicineAction,
+} from "../../../redux/slices/medicines/medicineSlices";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function UpdateMedicine() {
   const dispatch = useDispatch();
 
-  const { medicine, isAdded, loading, error } = useSelector(
-    (state) => state?.medicines);
+  const { medicine, loading } = useSelector(
+    (state) => state?.medicines
+  );
 
   const [name, setName] = useState(medicine?.medicine?.name);
-  const [description, setDescription] = useState(medicine?.medicine?.description);
+  const [description, setDescription] = useState(
+    medicine?.medicine?.description
+  );
   const [category, setCategory] = useState(medicine?.medicine?.category);
   const [images, setImages] = useState(medicine?.medicine?.images);
   const [price, setPrice] = useState(medicine?.medicine?.price);
-  const [countInStock, setCountInStock] = useState(medicine?.medicine?.countInStock);
+  const [countInStock, setCountInStock] = useState(
+    medicine?.medicine?.countInStock
+  );
 
-// navigate
-const navigate=useNavigate();
-//get id from params
-const { id } = useParams();
+  // navigate
+  const navigate = useNavigate();
+  //get id from params
+  const { id } = useParams();
 
   //fetch single product
   useEffect(() => {
-    dispatch(fetchSingleMedicineAction({id}));
+    dispatch(fetchSingleMedicineAction({ id }));
   }, [id, dispatch]);
-
-
 
   //onSubmit
   const handleOnSubmit = async (e) => {
@@ -42,13 +48,23 @@ const { id } = useParams();
       countInStock,
     };
 
-    dispatch(updateMedicineAction({obj,id}));
-    navigate("/admin/manage-medicines")
+    dispatch(updateMedicineAction({ obj, id }));
+
+    toast.info("Update medicine successfully", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    navigate("/admin/manage-medicines");
   };
 
   return (
     <>
-    
       <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8  section-padding mt-10">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
@@ -62,7 +78,7 @@ const { id } = useParams();
         </div>
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          {/* {error && <ErrorMsg message={error?.message} />}
+            {/* {error && <ErrorMsg message={error?.message} />}
       {isAdded && <SuccessMsg message="Medicine Update Successfully" />} */}
 
             <form className="space-y-6" onSubmit={handleOnSubmit}>
@@ -165,7 +181,7 @@ const { id } = useParams();
               </div>
 
               <div>
-                <button
+                <button disabled={loading}
                   type="submit"
                   className="flex w-full justify-center rounded-md border border-transparent bg-cyan-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
                 >

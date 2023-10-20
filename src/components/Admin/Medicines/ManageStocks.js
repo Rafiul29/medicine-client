@@ -18,13 +18,14 @@ export default function ManageStocks() {
     );
   }, [dispatch, medicineUrl]);
   //get data from store
-  const { medicines, loading, error } = useSelector(
+  const { medicines, loading } = useSelector(
     (state) => state?.medicines
   );
-  console.log(medicines?.medicines);
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 section-padding">
+   <>
+    <div className="px-4 sm:px-6 lg:px-8 section-padding mt-10">
+    {loading && <h2 className=" w-full text-xl text-center">Loadding ........</h2>}
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h1 className="text-xl font-semibold text-gray-900">
@@ -192,5 +193,6 @@ export default function ManageStocks() {
         </div>
       </div>
     </div>
+   </>
   );
 }

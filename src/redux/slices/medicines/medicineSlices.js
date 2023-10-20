@@ -1,9 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import {
-  resetErrAction,
-  resetSuccessAction,
-} from "../globalActions/globalActions";
 
 // initalState
 const initialState = {

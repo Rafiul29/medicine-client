@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import ErrorMsg from "../../ErrorMsg/ErrorMsg";
-import SuccessMsg from "../../SuccessMsg/SuccessMsg";
 import { createMedicineAction } from "../../../redux/slices/medicines/medicineSlices";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { fetchCategoriesAction } from "../../../redux/slices/categories/categoriesSlice";
 
 export default function AddMedicine() {
+
+  // dispatch
   const dispatch = useDispatch();
+  // navigate
+  const navigate=useNavigate()
+
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -15,12 +20,18 @@ export default function AddMedicine() {
   const [price, setPrice] = useState(0);
   const [countInStock, setCountInStock] = useState(0);
 
+
+  //categories
+  useEffect(() => {
+    dispatch(fetchCategoriesAction());
+  }, [dispatch]);
+  //select data from store
+  const { categories } = useSelector((state) => state?.categories?.categories);
+
   //get product from store
-  const { medicines, isAdded, error } = useSelector(
-    (state) => state?.medicines
-  
-  );
-  console.log(medicines)
+  const { medicines ,loading} = useSelector(
+    (state) => state?.medicines);
+
   function resetFrom(){
     setName("");
     setCategory("");
@@ -29,10 +40,12 @@ export default function AddMedicine() {
     setCountInStock("");
     setDescription("")
   };
+
+
   //onSubmit
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    //reset form data
+   
     const obj = {
       name,
       description,
@@ -41,18 +54,41 @@ export default function AddMedicine() {
       price,
       countInStock,
     };
-
+    if(!name || !description ||!images||!category||!price ||!countInStock ){
+      toast.error('🦄 Must be filed all filled', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+        return
+    }
     dispatch(createMedicineAction(obj));
 
     // reset input form
     resetFrom();
+
+    // toast messsage
+    toast.info("Added new  medicine successfully", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    // navigate to 
+    navigate("/admin/manage-medicines");
   };
 
   return (
     <>
-      {error && <ErrorMsg message={error?.message} />}
-      {isAdded && <SuccessMsg message="Medicine Added Successfully" />}
-
       <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8  section-padding mt-10">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
@@ -84,7 +120,7 @@ export default function AddMedicine() {
               </div>
 
               {/* Select category */}
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Category
                 </label>
@@ -97,6 +133,25 @@ export default function AddMedicine() {
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-cyan-500 focus:outline-none focus:ring-cyan-500 sm:text-sm"
                   />
                 </div>
+              </div> */}
+                 <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Select Category
+                </label>
+                <select
+                  name="category"
+                  value={category}
+                  onChange={(e)=>setCategory(e.target.value)}
+                  className="mt-1  block w-full rounded-md border-gray-300 py-2  pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm border"
+                  defaultValue="Canada"
+                >
+                  <option>-- Select Category --</option>
+                  {categories?.map((category) => (
+                    <option key={category?._id} value={category?.name}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               {/*  images */}
@@ -166,7 +221,7 @@ export default function AddMedicine() {
               </div>
 
               <div>
-                <button
+                <button disabled={loading}
                   type="submit"
                   className="flex w-full justify-center rounded-md border border-transparent bg-cyan-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
                 >
