@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
 // initalState
 const initialState = {
   medicines: [],
@@ -51,7 +50,7 @@ export const createMedicineAction = createAsyncThunk(
 
 export const updateMedicineAction = createAsyncThunk(
   "medicine/update",
-  async ({id,obj}, { rejectWithValue, getState, dispatch }) => {
+  async ({ id, obj }, { rejectWithValue, getState, dispatch }) => {
     try {
       const token = getState()?.users?.userAuth?.userInfo?.token;
       const config = {
@@ -62,7 +61,7 @@ export const updateMedicineAction = createAsyncThunk(
       const { data } = await axios.put(
         `${process.env.REACT_APP_API_BASE_URL}/medicines/${id}`,
         {
-          ...obj
+          ...obj,
         },
         config
       );
@@ -105,7 +104,7 @@ export const fetchSingleMedicineAction = createAsyncThunk(
       const { data } = await axios.get(
         `${process.env.REACT_APP_API_BASE_URL}/medicines/${id}`
       );
-      console.log(id);
+
       return data;
     } catch (error) {
       return rejectWithValue(error?.response?.data);
@@ -134,7 +133,6 @@ export const deleteMedicineAction = createAsyncThunk(
   }
 );
 
-
 const medicineSlice = createSlice({
   name: "medicine",
   initialState,
@@ -146,8 +144,8 @@ const medicineSlice = createSlice({
     builder.addCase(createMedicineAction.fulfilled, (state, action) => {
       state.loading = false;
       state.medicine = action.payload;
-      //    state.medicines.push(action.payload);
-       state.isAdded = true;
+       state.medicines.medicines=state.medicines.medicines.push(action.payload.medicine)
+      state.isAdded = true;
     });
     builder.addCase(createMedicineAction.rejected, (state, action) => {
       state.loading = false;
@@ -161,12 +159,12 @@ const medicineSlice = createSlice({
     });
     builder.addCase(updateMedicineAction.fulfilled, (state, action) => {
       state.loading = false;
-       state.medicine = action.payload;
+      state.medicine = action.payload;
       state.isUpdated = true;
-    //   const indexToUpdate = state.medicines.findIndex(
-    //     (t) => t.id === action.payload.id
-    // );
-    // state.medicines[indexToUpdate] = action.payload;
+      const indexToUpdate = state.medicines?.medicines?.findIndex(
+        (t) => t.id === action.meta.arg.id
+      );
+      state.medicines.medicines[indexToUpdate] = action.payload;
     });
     builder.addCase(updateMedicineAction.rejected, (state, action) => {
       state.loading = false;
@@ -211,17 +209,16 @@ const medicineSlice = createSlice({
     });
     builder.addCase(deleteMedicineAction.fulfilled, (state, action) => {
       state.loading = false;
-       state.medicine = action.payload;
+      state.medicine = action.payload;
       state.isAdded = true;
-// console.log("d", state?.medicines)
-//       state.medicines = state?.medicines?.filter(
-//         (t) => t._id !== action.meta.arg
-//     );
+      state.medicines.medicines = state.medicines?.medicines?.filter(
+        (m) => m._id !== action.meta.arg.id
+      );
     });
     builder.addCase(deleteMedicineAction.rejected, (state, action) => {
       state.loading = false;
       state.medicine = null;
-      state.isAdded = false;
+      state.isDeleted = false;
       state.error = action.payload;
     });
   },

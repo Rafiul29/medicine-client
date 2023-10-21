@@ -31,9 +31,7 @@ const MedicineFilters = () => {
   const {
     medicines,
     loading,
-    error,
   } = useSelector((state) => state?.medicines);
-console.log(medicines?.medicines)
 
   return (
     <section className='section-padding'>
@@ -43,7 +41,7 @@ console.log(medicines?.medicines)
           {medicines?.medicines.length===0&& <h2 className=" w-full text-xl  text-center">Loadding ........</h2>}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
       {
-        medicines?.medicines.map((medicine)=>(
+        medicines?.medicines?.map((medicine)=>(
           <MedicineCard key={medicine._id} medicine={medicine}/>
         ))
       }

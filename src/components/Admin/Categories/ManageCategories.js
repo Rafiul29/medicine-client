@@ -14,8 +14,8 @@ export default function ManageCategories() {
 const {categories,loading}=useSelector((state)=>state.categories)
 
   return (
-   
-    <div className="px-4 sm:px-6 lg:px-8 section-padding mt-10">
+    <main className="section-padding">
+      <div className="px-4 sm:px-6 lg:px-8 wrapper">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
         {loading && <h2 className=" w-full text-xl text-center">Loadding ........</h2>}
@@ -36,7 +36,7 @@ const {categories,loading}=useSelector((state)=>state.categories)
         </div>
       </div>
      
-        <div className="mt-8 flex flex-col">
+        <div className="mt-8 flex flex-col ">
           <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
               <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
@@ -92,5 +92,6 @@ const {categories,loading}=useSelector((state)=>state.categories)
         </div>
 
     </div>
+    </main>
   );
 }
