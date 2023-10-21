@@ -144,7 +144,7 @@ const medicineSlice = createSlice({
     builder.addCase(createMedicineAction.fulfilled, (state, action) => {
       state.loading = false;
       state.medicine = action.payload;
-       state.medicines.medicines=state.medicines.medicines.push(action.payload.medicine)
+      //  state.medicines.medicines=state.medicines.medicines.push(action.payload.medicine)
       state.isAdded = true;
     });
     builder.addCase(createMedicineAction.rejected, (state, action) => {
