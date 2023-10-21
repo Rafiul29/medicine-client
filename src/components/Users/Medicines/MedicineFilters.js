@@ -38,9 +38,9 @@ console.log(medicines?.medicines)
   return (
     <section className='section-padding'>
       <div className="wrapper space-y-10">
-     
-          <SectionTitle title="Medicine" subtitle="Browse all Medicine"/>
+          <SectionTitle title="Medicines" subtitle="Browse all Medicines"/>
           {loading && <h2 className=" w-full text-xl  text-center">Loadding ........</h2>}
+          {medicines?.medicines.length===0&& <h2 className=" w-full text-xl  text-center">Loadding ........</h2>}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
       {
         medicines?.medicines.map((medicine)=>(

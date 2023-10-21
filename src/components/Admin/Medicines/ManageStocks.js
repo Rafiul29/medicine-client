@@ -5,14 +5,27 @@ import {
   deleteMedicineAction,
   fetchMedicinesAction,
 } from "../../../redux/slices/medicines/medicineSlices";
+import { toast } from "react-toastify";
 
 export default function ManageStocks() {
   //dispatch
   const dispatch = useDispatch();
   //delete medicine handler
+  
 
   const deletemedicineHandler = (id) => {
     dispatch(deleteMedicineAction({id}));
+    // // toast messsage
+    toast.error("Delete medicine successfully", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
 
   let medicineUrl = `medicines`;
@@ -29,11 +42,11 @@ export default function ManageStocks() {
 
   return (
     <>
-      <div className="px-4 sm:px-6 lg:px-8 section-padding mt-10">
+      <div className="px-4 sm:px-6 lg:px-8 section-padding mt-10 wrapper">
         {loading && (
           <h2 className=" w-full text-xl text-center">Loadding ........</h2>
         )}
-        <div className="sm:flex sm:items-center">
+        <div className="sm:flex sm:items-center ">
           <div className="sm:flex-auto">
             <h1 className="text-xl font-semibold text-gray-900">
               medicine List- [{medicines?.medicines?.length}]{" "}
@@ -173,9 +186,9 @@ export default function ManageStocks() {
                           </Link>
                         </td>
                         {/* delete */}
-                        <td className=" whitespace-nowrap py-4 pl-3 pr-4  text-sm font-medium ">
+                        <td className=" py-4 pl-3 pr-4  text-sm font-medium ">
                           <button
-                            onClick={() => deletemedicineHandler(medicine._id)}
+                            onClick={()=>deletemedicineHandler(medicine._id)}
                             className="text-indigo-600 hover:text-indigo-900"
                           >
                             <svg
@@ -193,7 +206,6 @@ export default function ManageStocks() {
                               />
                             </svg>
 
-                            <span className="sr-only">, {medicine.name}</span>
                           </button>
                         </td>
                       </tr>

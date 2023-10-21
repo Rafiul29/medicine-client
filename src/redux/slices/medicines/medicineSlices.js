@@ -42,7 +42,6 @@ export const createMedicineAction = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      console.log(error?.response?.data);
       return rejectWithValue(error?.response?.data);
     }
   }
@@ -148,7 +147,7 @@ const medicineSlice = createSlice({
       state.loading = false;
       state.medicine = action.payload;
       //    state.medicines.push(action.payload);
-      // state.isAdded = true;
+       state.isAdded = true;
     });
     builder.addCase(createMedicineAction.rejected, (state, action) => {
       state.loading = false;
@@ -211,14 +210,13 @@ const medicineSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(deleteMedicineAction.fulfilled, (state, action) => {
-     
       state.loading = false;
-      state.medicine = action.payload;
+       state.medicine = action.payload;
       state.isAdded = true;
-      console.log("ed", state.medicines)
-    //   state.medicines = state.medicines?.filter(
-    //     (t) => t._id !== action.meta.arg
-    // );
+// console.log("d", state?.medicines)
+//       state.medicines = state?.medicines?.filter(
+//         (t) => t._id !== action.meta.arg
+//     );
     });
     builder.addCase(deleteMedicineAction.rejected, (state, action) => {
       state.loading = false;
