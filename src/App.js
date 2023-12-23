@@ -19,6 +19,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CategoryToAdd from "./components/Admin/Categories/AddCategory";
 import ManageCategories from "./components/Admin/Categories/ManageCategories";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -98,6 +99,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
+      <Footer/>
     </>
   );
 }

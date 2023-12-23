@@ -79,12 +79,7 @@ const Navbar = () => {
                 >
                   Sign In
                 </Link>
-                <Link
-                  to="/register"
-                  className=" bg-cyan-600/90 text-cyan-50 text-md px-5 py-3 rounded-xl font text-xl  hover:bg-cyan-500/75 hover:shadow-md hover:shadow-cyan-500/40 duration-700"
-                >
-                  Register
-                </Link>
+              
               </>
             )}
 

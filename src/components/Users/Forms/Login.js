@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUserAction } from "../../../redux/slices/users/usersSlice";
 import ErrorMsg from "../../ErrorMsg/ErrorMsg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
@@ -32,18 +32,16 @@ const Login = () => {
     (state) => state?.users?.userAuth
   );
 
-    useEffect(()=>{
-      if(userInfo?.userFound){
-        navigate("/")
-        window.location.reload();
-      }
-    })
-
-
+  useEffect(() => {
+    if (userInfo?.userFound) {
+      navigate("/");
+      window.location.reload();
+    }
+  });
 
   return (
     <>
-      <section className="py-20 bg-gray-600 overflow-x-hidden section-padding mt-20">
+      <section className="py-20 bg-gray-600 overflow-x-hidden section-padding mt-20 h-[calc(100vh-9rem)]">
         <div className="relative container px-4 mx-auto">
           <div className="absolute inset-0 bg-cyan-200 my-24 -ml-4" />
           <div className="relative flex flex-wrap bg-white">
@@ -52,18 +50,18 @@ const Login = () => {
                 <h3 className="mb-8 text-4xl md:text-5xl font-bold font-heading">
                   Login to your account
                 </h3>
-                <p className="mb-10 font-semibold font-heading">
+                <p className="mb-5 font-semibold font-heading">
                   Happy to see you again
                 </p>
                 {/* error */}
-                {error && <ErrorMsg message={error?.message}/>}
+                {error && <ErrorMsg message={error?.message} />}
                 <form
-                  className="flex flex-wrap -mx-4"
+                  className="flex flex-col gap-5"
                   onSubmit={onSubmitHandler}
                 >
-                  <div className="w-full md:w-1/2 px-4 mb-8 md:mb-12">
-                    <label>
-                      <h4 className="mb-5 text-gray-400 uppercase font-bold font-heading">
+                  <div className="w-full px-4">
+                    <label className="flex flex-col gap-2">
+                      <h4 className=" text-gray-400  font-bold font-heading">
                         Your Email
                       </h4>
                       <input
@@ -75,9 +73,9 @@ const Login = () => {
                       />
                     </label>
                   </div>
-                  <div className="w-full md:w-1/2 px-4 mb-12">
-                    <label>
-                      <h4 className="mb-5 text-gray-400 uppercase font-bold font-heading">
+                  <div className="w-full px-4 ">
+                    <label className="flex flex-col gap-2">
+                      <h4 className=" text-gray-400  font-bold font-heading">
                         Password
                       </h4>
                       <input
@@ -93,16 +91,30 @@ const Login = () => {
                   <div className="w-full px-4">
                     {loading ? (
                       <button
+                        type="submit"
                         disabled
-                        className="bg-gray-800  text-white font-bold font-heading py-5 px-8 rounded-md uppercase"
+                        className="w-full bg-cyan-600  text-white font-bold font-heading py-5 px-8 rounded-md uppercase"
                       >
                         Loading...
                       </button>
                     ) : (
-                      <button className="bg-cyan-800 hover:bg-cyan-900 text-white font-bold font-heading py-5 px-8 rounded-md uppercase">
+                      <button
+                        type="submit"
+                        className="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold font-heading py-5 px-8 rounded-md uppercase"
+                      >
                         Login
                       </button>
                     )}
+
+                    <p className="flex gap-2 mt-2">
+                      Don't have an account?{" "}
+                      <Link
+                        to="/register"
+                        className="text-blue-500 font-medium hover:underline"
+                      >
+                        register
+                      </Link>
+                    </p>
                   </div>
                 </form>
               </div>
