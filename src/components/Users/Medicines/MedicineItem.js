@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { fetchSingleMedicineAction } from "../../../redux/slices/medicines/medicineSlices";
-import {AiOutlineArrowLeft} from "react-icons/ai"
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import Rating from "../Rating/Rating";
 import ErrorMsg from "../../ErrorMsg/ErrorMsg";
 import { currencyFormatter } from "../../../utils/currencyFormatter";
@@ -11,6 +11,7 @@ import { addToCart } from "../../../redux/slices/Cart/cartSlice";
 const MedicineItem = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
 
   // get single medicine id
   const { id } = useParams();
@@ -21,19 +22,35 @@ const MedicineItem = () => {
 
   const { medicine, loading, error } = useSelector((state) => state?.medicines);
 
-  console.log(medicine?.medicine);
+   //get data from store
+   const {userInfo } = useSelector(
+    (state) => state?.users?.userAuth
+  );
 
-  const addToCartHander=(medicine)=>{
-    console.log({medicine})
-  dispatch(addToCart(medicine))
-    navigate("/cart")
-  }
+  const addToCartHander = (medicine) => {
+    if(userInfo?.userFound.email){
+      dispatch(addToCart(medicine));
+      navigate("/cart");
+    return;
+    }else{
+      navigate("/cart");
+      return;
+    }
+    // if(!userInfo?.userFound?.email){
+    //   return <Navigate to='/login' state={{from:location}} replace/>
+    // }
+  
+
+
+  };
+
+
 
   return (
     <>
       {loading && <h2>Loading ......</h2>}
-      {error && <ErrorMsg message={error}/>}
-      <section className=" wrapper py-20 mt-20 h-[calc(100vh-10rem)]">
+      {error && <ErrorMsg message={error} />}
+      <section className=" wrapper py-20 mt-20 h-[calc(100vh)]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
           <div className="img h-100 overflow-hidden">
             <img
@@ -52,7 +69,9 @@ const MedicineItem = () => {
             <h3 className="flex flex-row gap-5 text-lg ">
               {" "}
               <span>Price:</span>{" "}
-              <span className="font-semibold">{currencyFormatter(medicine?.medicine?.price)}</span>
+              <span className="font-semibold">
+                {currencyFormatter(medicine?.medicine?.price)}
+              </span>
             </h3>
             <h3 className="flex flex-row gap-5 text-lg ">
               {" "}
@@ -69,12 +88,20 @@ const MedicineItem = () => {
             />
 
             <div className="mt-5 font-bold">
-              <button
-              onClick={()=>addToCartHander(medicine?.medicine)}
-              className=" bg-cyan-600/90 text-cyan-50 text-md px-5 py-3 rounded-xl font text-xl  hover:bg-cyan-500/75 hover:shadow-md hover:shadow-cyan-500/40 duration-700"> Add to cart</button>
+           <button
+                onClick={() => addToCartHander(medicine?.medicine)}
+                className=" bg-cyan-600/90 text-cyan-50 text-md px-5 py-3 rounded-xl font text-xl  hover:bg-cyan-500/75 hover:shadow-md hover:shadow-cyan-500/40 duration-700"
+              >
+                {" "}
+                Add to cart
+              </button>
             </div>
-            <Link to="/medicines" className="flex flex-row gap-2 items-center text-xl mt-5">
-             <AiOutlineArrowLeft className="text-cyan-600 font-semibold"/> <span>Go Back</span>
+            <Link
+              to="/medicines"
+              className="flex flex-row gap-2 items-center text-xl mt-5"
+            >
+              <AiOutlineArrowLeft className="text-cyan-600 font-semibold" />{" "}
+              <span>Go Back</span>
             </Link>
           </div>
         </div>

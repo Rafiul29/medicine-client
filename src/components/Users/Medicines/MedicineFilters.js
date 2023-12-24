@@ -25,7 +25,7 @@ const MedicineFilters = () => {
   const { medicines, loading } = useSelector((state) => state?.medicines);
 
   return (
-    <section className="section-padding">
+    <section className="section-padding min-h-screen">
       <div className="wrapper space-y-10">
         <SectionTitle title="Medicines" subtitle="Browse all Medicines" />
        <div>
@@ -36,9 +36,9 @@ const MedicineFilters = () => {
           placeholder="search medicine"
         />
        </div>
-        {loading && <h2 className="text-xl  text-center">Loadding ........</h2>}
+        {loading && <h2 className="text-2xl  text-center">Loadding ........</h2>}
         {medicines?.medicines.length === 0 && (
-          <h2 className=" w-full text-xl  text-center">medicine not found</h2>
+          <h2 className=" w-full text-2xl  text-center text-red-400 font-semibold">medicine not found</h2>
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">

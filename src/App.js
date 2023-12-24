@@ -15,8 +15,8 @@ import MedicineItem from "./components/Users/Medicines/MedicineItem";
 import CartPages from "./pages/CartPages";
 import CustomerProfile from "./components/Users/Profile/CustomerProfile";
 import ManageStocks from "./components/Admin/Medicines/ManageStocks";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import CategoryToAdd from "./components/Admin/Categories/AddCategory";
 import ManageCategories from "./components/Admin/Categories/ManageCategories";
 import Footer from "./components/Footer/Footer";
@@ -25,9 +25,8 @@ function App() {
   return (
     <>
       <Navbar />
-      <ToastContainer/>
+      <ToastContainer />
       <Routes>
-      
         {/* admin route */}
         <Route
           path="/admin"
@@ -42,7 +41,7 @@ function App() {
           path="admin/add-medicine"
           element={
             <AdminRoutes>
-              <AddMedicine/>
+              <AddMedicine />
             </AdminRoutes>
           }
         />
@@ -54,52 +53,58 @@ function App() {
             </AdminRoutes>
           }
         />
-         <Route
-            path="admin/manage-medicines"
-            element={
-              <AdminRoutes>
-              <ManageStocks/>
-              </AdminRoutes>
-            }
-          />
+        <Route
+          path="admin/manage-medicines"
+          element={
+            <AdminRoutes>
+              <ManageStocks />
+            </AdminRoutes>
+          }
+        />
 
-            {/* Category */}
-            <Route
-            path="/admin/category-to-add"
-            element={
-              <AdminRoutes>
-                <CategoryToAdd />
-              </AdminRoutes>
-            }
-          />
-           <Route
-            path="/admin/manage-category"
-            element={
-              <AdminRoutes>
-                <ManageCategories />
-              </AdminRoutes>
-            }
-          />
-        
+        {/* Category */}
+        <Route
+          path="/admin/category-to-add"
+          element={
+            <AdminRoutes>
+              <CategoryToAdd />
+            </AdminRoutes>
+          }
+        />
+        <Route
+          path="/admin/manage-category"
+          element={
+            <AdminRoutes>
+              <ManageCategories />
+            </AdminRoutes>
+          }
+        />
+
         {/* public routes */}
         <Route path="/" element={<Home />} />
         <Route path="/medicines" element={<MedicinePage />} />
-        <Route path="/medicines/:id" element={<MedicineItem/>} />
+        <Route path="/medicines/:id" element={ <MedicineItem/>} />
         {/* <Route path="/medicines-filters" element={<MedicineFilters />} /> */}
-        <Route path="/cart" element={<CartPages/>} />
-       <Route
+        <Route
+          path="/cart"
+          element={
+            <AuthRoute>
+              <CartPages />
+            </AuthRoute>
+          }
+        />
+        <Route
           path="/customer-profile"
           element={
             <AuthRoute>
               <CustomerProfile />
             </AuthRoute>
           }
-        
-         />
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </>
   );
 }

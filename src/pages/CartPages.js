@@ -13,7 +13,6 @@ const CartPages = () => {
 
   const { cartItems: data ,cartTotalAmount:subtotal} = useSelector((state) => state.cart);
 
-  console.log(data.length)
   const medicineCard = () => {
     navigate("/medicines");
   };
@@ -38,7 +37,7 @@ const CartPages = () => {
 
   
   return (
-    <div className="cart-section container mx-auto section-padding">
+    <div className="cart-section container mx-auto section-padding h-[calc(100vh-4rem)]">
       <h2 className="section-title uppercase text-2xl font-bold space-font text-center mb-10 mt-10">
       {data.length>0? `You've added ${data.length} item${data.length>1? "s":""}`:"Cart is Empty" }
       </h2>

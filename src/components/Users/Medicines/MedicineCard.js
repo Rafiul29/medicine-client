@@ -9,6 +9,8 @@ const MedicineCard = ({medicine}) => {
     price,
   _id,
   }=medicine
+
+
   return (
     <div className=" product flex flex-col gap-2 rounded-md overflow-hidden border shadow-md hover:shadow-xl duration-300 ">
     <div className="img w-full h-64 overflow-hidden">

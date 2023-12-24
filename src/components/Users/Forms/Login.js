@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUserAction } from "../../../redux/slices/users/usersSlice";
 import ErrorMsg from "../../ErrorMsg/ErrorMsg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  let location = useLocation();
 
   const [formData, setFormData] = useState({
     email: "admin@gmail.com",
@@ -31,10 +32,12 @@ const Login = () => {
   const { error, loading, userInfo } = useSelector(
     (state) => state?.users?.userAuth
   );
-
+  
+  let from = location.state?.from?.pathname || "/";
+console.log(location.state?.from?.pathname);
   useEffect(() => {
     if (userInfo?.userFound) {
-      navigate("/");
+      navigate(from,{replace:true});
       window.location.reload();
     }
   });
