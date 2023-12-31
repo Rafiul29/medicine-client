@@ -12,7 +12,6 @@ const MedicineItem = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
   // get single medicine id
   const { id } = useParams();
 
@@ -22,29 +21,22 @@ const MedicineItem = () => {
 
   const { medicine, loading, error } = useSelector((state) => state?.medicines);
 
-   //get data from store
-   const {userInfo } = useSelector(
-    (state) => state?.users?.userAuth
-  );
+  //get data from store
+  const { userInfo } = useSelector((state) => state?.users?.userAuth);
 
   const addToCartHander = (medicine) => {
-    if(userInfo?.userFound.email){
+    if (userInfo?.userFound.email) {
       dispatch(addToCart(medicine));
       navigate("/cart");
-    return;
-    }else{
+      return;
+    } else {
       navigate("/cart");
       return;
     }
     // if(!userInfo?.userFound?.email){
     //   return <Navigate to='/login' state={{from:location}} replace/>
     // }
-  
-
-
   };
-
-
 
   return (
     <>
@@ -77,9 +69,17 @@ const MedicineItem = () => {
               {" "}
               <span>Status:</span>{" "}
               <span className="font-semibold">
-                {medicine?.medicine?.countInStock > 0
-                  ? "In Stock"
-                  : "Out of Stock"}
+                <div>
+                  {medicine?.medicine?.countInStock > 0 ? (
+                    <span className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                      In Stock
+                    </span>
+                  ) : (
+                    <div className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                      Out of Stock
+                    </div>
+                  )}
+                </div>
               </span>
             </h3>
             <Rating
@@ -88,7 +88,7 @@ const MedicineItem = () => {
             />
 
             <div className="mt-5 font-bold">
-           <button
+              <button
                 onClick={() => addToCartHander(medicine?.medicine)}
                 className=" bg-cyan-600/90 text-cyan-50 text-md px-5 py-3 rounded-xl font text-xl  hover:bg-cyan-500/75 hover:shadow-md hover:shadow-cyan-500/40 duration-700"
               >

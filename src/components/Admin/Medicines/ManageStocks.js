@@ -11,10 +11,9 @@ export default function ManageStocks() {
   //dispatch
   const dispatch = useDispatch();
   //delete medicine handler
-  
 
   const deletemedicineHandler = (id) => {
-    dispatch(deleteMedicineAction({id}));
+    dispatch(deleteMedicineAction({ id }));
     // // toast messsage
     toast.error("Delete medicine successfully", {
       position: "top-right",
@@ -39,7 +38,7 @@ export default function ManageStocks() {
   }, [dispatch, medicineUrl]);
   //get data from store
   const { medicines, loading } = useSelector((state) => state?.medicines);
-
+console.log(medicines?.medicines)
   return (
     <>
       <div className="px-4 sm:px-6 lg:px-8 section-padding mt-10 wrapper">
@@ -144,7 +143,13 @@ export default function ManageStocks() {
                           </div>
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          {medicine?.countMedicine < 0 ? (
+                          <div>
+                          {medicine.countInStock > 0
+                            ? <span className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">In Stock</span>
+                            : <div className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Out of Stock</div>}
+                          </div>
+                         
+                          {/* {medicine?.countMedicine < 0 ? (
                             <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
                               Out of Stock
                             </span>
@@ -152,7 +157,7 @@ export default function ManageStocks() {
                             <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                               In Stock
                             </span>
-                          )}
+                          )} */}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {medicine?.countInStock}
@@ -188,7 +193,7 @@ export default function ManageStocks() {
                         {/* delete */}
                         <td className=" py-4 pl-3 pr-4  text-sm font-medium ">
                           <button
-                            onClick={()=>deletemedicineHandler(medicine._id)}
+                            onClick={() => deletemedicineHandler(medicine._id)}
                             className="text-indigo-600 hover:text-indigo-900"
                           >
                             <svg
@@ -205,7 +210,6 @@ export default function ManageStocks() {
                                 d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
                               />
                             </svg>
-
                           </button>
                         </td>
                       </tr>
