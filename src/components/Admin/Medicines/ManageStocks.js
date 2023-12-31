@@ -38,7 +38,7 @@ export default function ManageStocks() {
   }, [dispatch, medicineUrl]);
   //get data from store
   const { medicines, loading } = useSelector((state) => state?.medicines);
-console.log(medicines?.medicines)
+
   return (
     <>
       <div className="px-4 sm:px-6 lg:px-8 section-padding mt-10 wrapper">
@@ -149,15 +149,7 @@ console.log(medicines?.medicines)
                             : <div className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Out of Stock</div>}
                           </div>
                          
-                          {/* {medicine?.countMedicine < 0 ? (
-                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                              Out of Stock
-                            </span>
-                          ) : (
-                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                              In Stock
-                            </span>
-                          )} */}
+                        
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {medicine?.countInStock}
