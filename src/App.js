@@ -20,6 +20,7 @@ import "react-toastify/dist/ReactToastify.css";
 import CategoryToAdd from "./components/Admin/Categories/AddCategory";
 import ManageCategories from "./components/Admin/Categories/ManageCategories";
 import Footer from "./components/Footer/Footer";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -83,7 +84,7 @@ function App() {
         {/* public routes */}
         <Route path="/" element={<Home />} />
         <Route path="/medicines" element={<MedicinePage />} />
-        <Route path="/medicines/:id" element={ <MedicineItem/>} />
+        <Route path="/medicines/:id" element={<MedicineItem />} />
         {/* <Route path="/medicines-filters" element={<MedicineFilters />} /> */}
         <Route
           path="/cart"
@@ -101,6 +102,14 @@ function App() {
             </AuthRoute>
           }
         />
+        <Route
+          path="/checkout"
+          element={
+            <AuthRoute>
+              <Checkout></Checkout>
+            </AuthRoute>
+          }
+        ></Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

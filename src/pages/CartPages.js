@@ -112,9 +112,9 @@ const CartPages = () => {
           <p className="text-gray-400">
             Taxes and shipping costs are calculated at the checkout
           </p>
-          <button className="checkout bg-cyan-500 w-full py-3 uppercase font-medium text-cyan-50 tracking-widest hover:bg-cyan-600 duration-300">
+          <Link to="/checkout" className="checkout text-center bg-cyan-500 w-full py-3 uppercase font-medium text-cyan-50 tracking-widest hover:bg-cyan-600 duration-300">
             Checkout
-          </button>{" "}
+          </Link>{" "}
           <button
             className="continune uppercase text-cyan-500 md:font-medium flex flex-row gap-1 mt-2 text-sm "
             onClick={medicineCard}

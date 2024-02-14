@@ -29,7 +29,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="w-full h-20 border-b border-cyan flex items-center bg-white/90 backdrop-blur-2xl fixed z-50 top-0 right-0 left-0 ">
+    <header className="w-full h-20 border-b border-cyan flex items-center bg-white/90 backdrop-blur-lg fixed z-50 top-0 right-0 left-0 ">
       <nav className="wrapper flex justify-between items-center">
         {/* nav logo */}
         <h2 className="logo">
@@ -75,8 +75,7 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className="bg-cyan-600/90 text-cyan-50 text-md px-5 py-2 rounded-md hover:bg-cyan-500/75
-            shadow-lg hover:shadow-md hover:shadow-cyan-500/40 duration-700"
+                  className="bg-cyan-600/90 text-cyan-50 text-md px-5 py-2 rounded-md hover:bg-cyan-500/75 shadow-lg hover:shadow-md hover:shadow-cyan-500/40 duration-700"
                 >
                   sign in
                 </Link>

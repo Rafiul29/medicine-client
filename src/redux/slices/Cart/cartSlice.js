@@ -6,7 +6,9 @@ const initialState = {
     ? JSON.parse(localStorage.getItem("cartItems"))
     : [],
   cartTotalQuantity: 0,
-  cartTotalAmount: 0,
+  cartTotalAmount: localStorage.getItem("cartTotalAmount")
+  ? JSON.parse(localStorage.getItem("cartTotalAmount"))
+  : 0,
 };
 
 const cartSlice = createSlice({
@@ -138,6 +140,7 @@ const cartSlice = createSlice({
           return acc
       },0)
       state.cartTotalAmount=subtotal;
+      localStorage.setItem("cartTotalAmount", JSON.stringify(state.cartTotalAmount));
     }
   },
 });

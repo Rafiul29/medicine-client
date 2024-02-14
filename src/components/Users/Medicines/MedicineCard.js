@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { currencyFormatter } from "../../../utils/currencyFormatter";
 
 const MedicineCard = ({ medicine }) => {
+  console.log({medicine})
   const { name, description, images, price, _id } = medicine;
 
   return (

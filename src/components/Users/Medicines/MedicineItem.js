@@ -44,7 +44,7 @@ const MedicineItem = () => {
       {error && <ErrorMsg message={error} />}
       <section className=" wrapper py-20 mt-20 h-[calc(100vh)]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
-          <div className="img h-100 overflow-hidden">
+          <div className="img h-100 overflow-hidden  border-2 rounded-md">
             <img
               src={medicine?.medicine?.images}
               alt={medicine?.medicine?.name}
@@ -90,18 +90,16 @@ const MedicineItem = () => {
             <div className="mt-3 flex gap-10">
               <button
                 onClick={() => addToCartHander(medicine?.medicine)}
-                className=" text-xl mt-5 bg-cyan-100 text-cyan-800 px-5 py-2 rounded-md  hover:bg-cyan-500/75
-                shadow-lg hover:shadow-md hover:shadow-cyan-500/40 duration-700"
+                className="bg-cyan-600/90 text-cyan-50 text-md px-5 py-2 rounded-md hover:bg-cyan-500/75 shadow-lg hover:shadow-md hover:shadow-cyan-500/40 duration-700"
               >
                 {" "}
                 add to cart
               </button>
               <Link
                 to="/medicines"
-                className=" flex flex-row gap-2 items-center text-xl mt-5 bg-cyan-100 text-cyan-800 px-5 py-2 rounded-md  hover:bg-cyan-500/75
-                shadow-lg hover:shadow-md hover:shadow-cyan-500/40 duration-700"
+                className="flex items-center justify-between gap-2  bg-cyan-600/90 text-cyan-50 text-md px-5 p-1 rounded-md hover:bg-cyan-500/75 shadow-lg hover:shadow-md hover:shadow-cyan-500/40 duration-700"
               >
-                <AiOutlineArrowLeft className="text-cyan-600 " />{" "}
+                <AiOutlineArrowLeft  className="font-semibold"/>
                 <span>go back</span>
               </Link>
             </div>
