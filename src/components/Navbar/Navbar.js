@@ -33,15 +33,15 @@ const Navbar = () => {
       <nav className="wrapper flex justify-between items-center">
         {/* nav logo */}
         <h2 className="logo">
-          <Link className="text-2xl font-semibold" to="/">
-            Medi<span className="text-cyan-500 text-3xl">ci</span>ne St
-            <span className="text-cyan-500 text-3xl">o</span>re
+          <Link className="text-md font-semibold" to="/">
+            Me<span className="text-cyan-500 text-xl">di</span>cine St
+            <span className="text-cyan-500 text-xl">o</span>re
           </Link>
         </h2>
 
         {/* nav middle */}
         <div className="hidden sm:block">
-          <div className="flex gap-5 font-bold">
+          <div className="flex gap-5 ">
             <Link to="/" className="link-item ">
               Home
             </Link>
@@ -75,11 +75,11 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className=" bg-cyan-600/90 text-cyan-50 text-md px-5 py-3 rounded-xl font text-xl  hover:bg-cyan-500/75 hover:shadow-md hover:shadow-cyan-500/40 duration-700"
+                  className="bg-cyan-600/90 text-cyan-50 text-md px-5 py-2 rounded-md hover:bg-cyan-500/75
+            shadow-lg hover:shadow-md hover:shadow-cyan-500/40 duration-700"
                 >
-                  Sign In
+                  sign in
                 </Link>
-              
               </>
             )}
 

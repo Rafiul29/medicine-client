@@ -52,10 +52,10 @@ const MedicineItem = () => {
             />
           </div>
           <div className=" flex flex-col gap-5 p-5">
-            <h2 className="text-4xl font-semibold tracking-widest">
+            <h2 className="text-2xl font-medium tracking-widest text-gray-700">
               {medicine?.medicine?.name}
             </h2>
-            <p className="text-lg tracking-wider leading-7 ">
+            <p className="text-md text-gray-600 tracking-wider leading-7 ">
               {medicine?.medicine?.description}
             </p>
             <h3 className="flex flex-row gap-5 text-lg ">
@@ -75,9 +75,9 @@ const MedicineItem = () => {
                       In Stock
                     </span>
                   ) : (
-                    <div className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                    <span className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
                       Out of Stock
-                    </div>
+                    </span>
                   )}
                 </div>
               </span>
@@ -87,22 +87,24 @@ const MedicineItem = () => {
               text={`${medicine?.medicine?.totalReviews}`}
             />
 
-            <div className="mt-5 font-bold">
+            <div className="mt-3 flex gap-10">
               <button
                 onClick={() => addToCartHander(medicine?.medicine)}
-                className=" bg-cyan-600/90 text-cyan-50 text-md px-5 py-3 rounded-xl font text-xl  hover:bg-cyan-500/75 hover:shadow-md hover:shadow-cyan-500/40 duration-700"
+                className=" text-xl mt-5 bg-cyan-100 text-cyan-800 px-5 py-2 rounded-md  hover:bg-cyan-500/75
+                shadow-lg hover:shadow-md hover:shadow-cyan-500/40 duration-700"
               >
                 {" "}
-                Add to cart
+                add to cart
               </button>
+              <Link
+                to="/medicines"
+                className=" flex flex-row gap-2 items-center text-xl mt-5 bg-cyan-100 text-cyan-800 px-5 py-2 rounded-md  hover:bg-cyan-500/75
+                shadow-lg hover:shadow-md hover:shadow-cyan-500/40 duration-700"
+              >
+                <AiOutlineArrowLeft className="text-cyan-600 " />{" "}
+                <span>go back</span>
+              </Link>
             </div>
-            <Link
-              to="/medicines"
-              className="flex flex-row gap-2 items-center text-xl mt-5"
-            >
-              <AiOutlineArrowLeft className="text-cyan-600 font-semibold" />{" "}
-              <span>Go Back</span>
-            </Link>
           </div>
         </div>
       </section>

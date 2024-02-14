@@ -41,7 +41,7 @@ export default function ManageStocks() {
 
   return (
     <>
-      <div className="px-4 sm:px-6 lg:px-8 section-padding mt-10 wrapper">
+      <div className="px-4 sm:px-6 lg:px-8 section-padding mt-10 wrapper min-h-screen">
         {loading && (
           <h2 className=" w-full text-xl text-center">Loadding ........</h2>
         )}

@@ -21,7 +21,7 @@ export default function CustomerProfile() {
    <>
       {error && (<ErrorMsg message={error} />)}
       {loading && (<h2>loading .....</h2>)}
-    <section className="section-padding mt-20 ">
+    <section className="section-padding mt-20 min-h-screen">
     <div className="wrapper flex justify-center items-center ">
     <div className="space-y-10">
       <div className="min-w-0 flex-1">

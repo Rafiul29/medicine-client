@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ErrorMsg from "../../ErrorMsg/ErrorMsg";
 import { registerUserAction } from "../../../redux/slices/users/usersSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -20,36 +20,38 @@ const Register = () => {
   };
 
   const submitHandler = (e) => {
-    console.log("first")
     e.preventDefault();
     dispatch(registerUserAction({ fullname, email, password }));
   };
 
   const { user, error, loading } = useSelector((state) => state?.users);
+  
+  const navigate=useNavigate()
+  useEffect(()=>{
+    if(user?.data){
+      navigate("/login")
+    }
+  },[user?.data,navigate])
 
-  //redirect
-  // if (user?.email) {
-  //   window.location.href = "/login";
-  // }
 
   return (
     <>
       <section className="relative overflow-x-hidden section-padding h-[calc(100vh-4rem)]">
         <div className="container px-4 mx-auto">
-          <div className="flex flex-wrap items-center">
-            <div className="w-full lg:w-2/6 px-4 mb-12 lg:mb-0">
+          <div className="flex flex-wrap  justify-centeritems-center">
+            <div className="w-full lg:w-2/6 px-4 mb-12 lg:mb-0 mt-20">
               <div className="py-20 text-center">
-                <h3 className="mb-8 text-4xl md:text-5xl font-bold font-heading">
+                <h3 className="mb-8 text-4xl md:text-3xl font-bold font-heading text-gray-600">
                   Signing up with medicine is super quick
                 </h3>
                 {/* errr */}
-                {error && <ErrorMsg message={error?.message} />}
+                {/* {error && <ErrorMsg message={error?.message} />} */}
                 <form onSubmit={submitHandler}>
                   <input
                     name="fullname"
                     value={fullname}
                     onChange={onChangeHandler}
-                    className="w-full mb-4 px-12 py-6 border border-gray-200 focus:ring-cyan-300 focus:border-cyan-300 rounded-md"
+                    className="w-full mb-4 px-4 py-3 border border-gray-200 focus:ring-cyan-300 focus:border-cyan-300 rounded-md"
                     type="text"
                     placeholder="Full Name"
                   />
@@ -57,7 +59,7 @@ const Register = () => {
                     name="email"
                     value={email}
                     onChange={onChangeHandler}
-                    className="w-full mb-4 px-12 py-6 border border-gray-200 focus:ring-cyan-300 focus:border-cyan-300 rounded-md"
+                    className="w-full mb-4 px-4 py-3 border border-gray-200 focus:ring-cyan-300 focus:border-cyan-300 rounded-md"
                     type="email"
                     placeholder="Enter your email"
                   />
@@ -65,7 +67,7 @@ const Register = () => {
                     name="password"
                     value={password}
                     onChange={onChangeHandler}
-                    className="w-full mb-4 px-12 py-6 border border-gray-200 focus:ring-cyan-300 focus:border-cyan-300 rounded-md"
+                    className="w-full mb-4 px-4 py-3 border border-gray-200 focus:ring-cyan-300 focus:border-cyan-300 rounded-md"
                     type="password"
                     placeholder="Enter your password"
                   />
@@ -73,12 +75,12 @@ const Register = () => {
                   {loading ? (
                     <button
                       disabled type="submit"
-                      className="bg-cyan-600  text-white font-bold font-heading py-5 px-8 rounded-md uppercase"
+                      className="bg-cyan-600  text-white font-bold font-heading px-4 py-3 rounded-md uppercase"
                     >
                       Loading...
                     </button>
                   ) : (
-                    <button type="submit" className="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold font-heading py-5 px-8 rounded-md uppercase">
+                    <button type="submit" className="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold font-heading py-2 px-8 rounded-md duration-500">
                       Register
                     </button>
                   )}
@@ -93,6 +95,7 @@ const Register = () => {
                     </Link>
                   </p>
                 </form>
+                {error &&   <p className=" mt-2 p-1 rounded-md bg-red-100 text-red-500">{error.message}</p>}
               </div>
             </div>
           </div>

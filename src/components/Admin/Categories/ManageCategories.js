@@ -14,7 +14,7 @@ export default function ManageCategories() {
 const {categories,loading}=useSelector((state)=>state.categories)
 
   return (
-    <main className="section-padding">
+    <main className="section-padding min-h-[calc(100vh-9rem)]">
       <div className="px-4 sm:px-6 lg:px-8 wrapper">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
