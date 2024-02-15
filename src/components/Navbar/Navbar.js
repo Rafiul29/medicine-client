@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
   AiOutlineShoppingCart,
@@ -22,8 +22,10 @@ const Navbar = () => {
   const user = JSON.parse(localStorage.getItem("userInfo"));
   const isLoggedIn = user?.token ? true : false;
 
+  const navigate = useNavigate();
   const logoutHandler = () => {
     dispatch(logoutAction());
+    navigate("/");
     //reload
     window.location.reload();
   };
@@ -48,6 +50,12 @@ const Navbar = () => {
             <Link to="/medicines" className="link-item ">
               Medicine
             </Link>
+            {isLoggedIn && (
+              <Link to="/user/orders" className="link-item ">
+                Orders
+              </Link>
+            )}
+
             <Link to="/about" className="link-item ">
               About
             </Link>
