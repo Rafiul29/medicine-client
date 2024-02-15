@@ -23,7 +23,7 @@ const MedicineFilters = () => {
   }, [dispatch, medicineUrl]);
 
   const { medicines, loading } = useSelector((state) => state?.medicines);
-  console.log(medicines?.medicines);
+
   let content = null;
 
   if (loading) {

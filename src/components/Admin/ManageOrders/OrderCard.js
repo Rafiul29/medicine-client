@@ -4,7 +4,7 @@ import { currencyFormatter } from "../../../utils/currencyFormatter";
 const OrderCard = ({ order }) => {
   console.log(order);
   return (
-    <div className="grid grid-cols-1 md:grid-cols-7  border p-3 rounded-md">
+    <div className="grid grid-cols-1 md:grid-cols-7 gap-2 md:gap-0 border p-3 rounded-md">
       <div className="space-y-2 md:col-span-3">
         <div className="space-x-1 text-md">
           <span className="uppercase font-semibold">order id:</span>{" "}
@@ -49,7 +49,7 @@ const OrderCard = ({ order }) => {
           </ul>
         </div>
       </div>
-      <div className="col-span-2 space-y-2 text-sm">
+      <div className="md:col-span-2 space-y-2 text-sm">
         <h2 className="space-x-1">
           <span className="capitalize font-semibold">total amount:</span>
           <span className="text-cyan-500 text-md ">
