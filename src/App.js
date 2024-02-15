@@ -21,6 +21,8 @@ import CategoryToAdd from "./components/Admin/Categories/AddCategory";
 import ManageCategories from "./components/Admin/Categories/ManageCategories";
 import Footer from "./components/Footer/Footer";
 import Checkout from "./pages/Checkout";
+import ManageOrders from "./components/Admin/ManageOrders/ManageOrders";
+import Orders from "./pages/Orders";
 
 function App() {
   return (
@@ -81,6 +83,14 @@ function App() {
           }
         />
 
+        <Route
+          path="/admin/manage-orders"
+          element={
+            <AdminRoutes>
+              <ManageOrders />
+            </AdminRoutes>
+          }
+        />
         {/* public routes */}
         <Route path="/" element={<Home />} />
         <Route path="/medicines" element={<MedicinePage />} />
@@ -107,6 +117,14 @@ function App() {
           element={
             <AuthRoute>
               <Checkout></Checkout>
+            </AuthRoute>
+          }
+        ></Route>
+         <Route
+          path="/orders"
+          element={
+            <AuthRoute>
+              <Orders></Orders>
             </AuthRoute>
           }
         ></Route>

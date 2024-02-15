@@ -3,6 +3,7 @@ import usersReducer from "../slices/users/usersSlice";
 import medicineReducer, { fetchMedicinesAction } from "../slices/medicines/medicineSlices";
 import cartReducer from "../slices/Cart/cartSlice"
 import categoryReducer from "../slices/categories/categoriesSlice";
+import ordersReducer from "../slices/orders/ordersSlice"
 // store
 const store=configureStore({
   reducer:{
@@ -10,6 +11,7 @@ const store=configureStore({
     medicines:medicineReducer,
     cart:cartReducer,
     categories: categoryReducer,
+    orders:ordersReducer,
   }
 })
 

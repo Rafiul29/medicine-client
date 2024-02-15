@@ -25,6 +25,7 @@ export default function AddMedicine() {
   useEffect(() => {
     dispatch(fetchCategoriesAction());
   }, [dispatch]);
+
   //select data from store
   const { categories } = useSelector((state) => state?.categories?.categories);
 
@@ -53,6 +54,7 @@ export default function AddMedicine() {
       category,
       price,
       countInStock,
+      
     };
     if(!name || !description ||!images||!category||!price ||!countInStock ){
       toast.error('🦄 Must be filed all filled', {
