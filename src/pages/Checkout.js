@@ -6,6 +6,7 @@ import { createOrderAction } from "../redux/slices/orders/ordersSlice";
 import { toast } from "react-toastify";
 
 const Checkout = () => {
+
   const { cartItems: data, cartTotalAmount: subtotal } = useSelector(
     (state) => state.cart
   );
@@ -34,42 +35,46 @@ const Checkout = () => {
       total_amount: subtotal,
       medicines: data,
     };
-    // if(!name || !description ||!images||!category||!price ||!countInStock ){
-    //   toast.error('🦄 Must be filed all filled', {
-    //     position: "top-right",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "light",
-    //     });
-    //     return
-    // }
+    
+    if (!name || !email || !address || !city || !phoneNumber) {
+      toast.error("🦄 Must be filed all filled", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return;
+    }
     dispatch(createOrderAction(obj));
   };
 
   const { order, loading } = useSelector((state) => state?.orders.order);
-  console.log(order)
+
   useEffect(() => {
-    if(order?._id){
-       // toast messsage
-    toast.info("Order successfully done ", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-    localStorage.removeItem("cartItems");
-    localStorage.removeItem("cartTotalAmount")
-    navigate("/");
+    if (order?._id) {
+      // toast messsage
+      toast.info("Order successfully done ", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      localStorage.removeItem("cartItems");
+      localStorage.removeItem("cartTotalAmount");
+
+      navigate("/success");
+      window.location.reload();
     }
-  }, [order?._id,navigate]);
+  }, [order?._id, navigate]);
+
   return (
     <div className="section-padding mt-20 min-h-[calc(100vh-9rem)]">
       <div className="wrapper">
@@ -159,9 +164,9 @@ const Checkout = () => {
                 <button
                   disabled={loading}
                   type="submit"
-                  className="block w-full text-md appearance-none rounded-md border bg-cyan-500 px-3 py-2  shadow-sm focus:border-cyan-500 focus:outline-none focus:ring-cyan-500 sm:text-sm"
+                  className="block w-full font-semibold text-md text-gray-200 appearance-none rounded-md border bg-cyan-500 px-3 py-2  shadow-md  sm:text-sm hover:bg-cyan-600 hover:text-gray-100 duration-500"
                 >
-                  Proceed to checkout
+                  {!loading ? "Proceed to checkout" : "Loading..."}
                 </button>
               </div>
             </form>

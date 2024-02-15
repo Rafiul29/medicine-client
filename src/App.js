@@ -23,6 +23,7 @@ import Footer from "./components/Footer/Footer";
 import Checkout from "./pages/Checkout";
 import ManageOrders from "./components/Admin/ManageOrders/ManageOrders";
 import Orders from "./pages/Orders";
+import CheckoutSuccess from "./pages/CheckoutSuccess";
 
 function App() {
   return (
@@ -121,10 +122,18 @@ function App() {
           }
         ></Route>
          <Route
-          path="/orders"
+          path="/user/orders"
           element={
             <AuthRoute>
               <Orders></Orders>
+            </AuthRoute>
+          }
+        ></Route>
+        <Route
+          path="/success"
+          element={
+            <AuthRoute>
+              <CheckoutSuccess></CheckoutSuccess>
             </AuthRoute>
           }
         ></Route>
